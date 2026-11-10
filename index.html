@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#f7f6f2">
+  <title>FishBuy spreadsheet | Liens produits, tailles et photos QC</title>
+  <meta name="description" content="Utilisez le FishBuy spreadsheet pour comparer vos liens produits, vérifier les tailles et les photos QC, puis estimer le coût total de votre colis.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="FishBuy spreadsheet | Liens produits, tailles et photos QC">
+  <meta property="og:description" content="Dix rayons CAFANS et un guide pour vérifier une fiche produit, lire les photos QC et estimer le coût de livraison.">
+  <meta property="og:image" content="https://static.nike.com/a/images/f_auto,q_auto:eco,w_720/8e4fa932-b38b-4cbe-9f09-16ccdcc0b421/AIR%2BMAX%2B90.png">
+  <meta property="og:image:alt" content="Nike Air Max 90 blanche et gris fumé, vue de profil">
+  <link rel="icon" href="https://cafans.com/favicon.ico">
+  <link rel="preconnect" href="https://static.nike.com">
+  <!-- Recherche éditoriale : Google a renvoyé HTTP 429. L’ordre de sa première page reste indéterminé.
+  Dix sites consultés via la recherche web : cafans.com, qcradar.com, w2clinks.com, fishbuy.in,
+  fishgoo.net, fishgoo.app, fishgoo.org.uk, findhaul.com, mickeybuys.com et fishgootable.com.
+  Les résultats d’aquariophilie ont été écartés. Les autres annuaires ont servi à repérer les
+  sujets utiles, sans attribuer leurs fonctionnalités à FishBuy. -->
+  <style>
+    :root{color-scheme:light;--paper:#f7f6f2;--ink:#241b36;--muted:#534961;--line:#cbc3d5;--violet:#e8ddfa;--lime:#e0efb4;--dark:#301950}
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.6 system-ui,sans-serif}
+    a{color:inherit;text-underline-offset:.2em}
+    :focus-visible{outline:3px solid #6429a0;outline-offset:3px}
+    .shell{width:min(72rem,calc(100% - 2rem));margin-inline:auto}
+    .masthead,footer{display:flex;justify-content:space-between;align-items:center;gap:.5rem 1rem;flex-wrap:wrap;padding-block:.85rem}
+    .wordmark{font-weight:850;letter-spacing:-.02em}
+    .note{font-size:.88rem;color:var(--muted)}
+    .hero{display:grid;grid-template-columns:1.2fr 1fr;background:var(--violet);border:1px solid var(--line)}
+    .hero-copy{align-self:center;padding:clamp(1.15rem,4vw,3.5rem)}
+    .kicker{margin:0 0 .45rem;font-size:.75rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+    h1,h2{font-family:Georgia,serif;line-height:1.06;letter-spacing:-.035em;text-wrap:balance}
+    h1{font-size:clamp(2.55rem,6.2vw,5.6rem);margin:0}
+    h2{font-size:clamp(1.85rem,3.6vw,3rem);margin:0 0 .9rem}
+    h3{font-size:1.15rem;line-height:1.3;margin:0 0 .5rem}
+    p{margin:.5rem 0 1rem}
+    .button{display:inline-flex;align-items:center;min-height:44px;padding:.45rem 1rem;background:var(--dark);color:#fff;font-weight:750;text-decoration:none}
+    .button:hover{background:#4a2874}
+    .hero-image{margin:0;display:grid;grid-template-rows:1fr auto;min-width:0;background:#f2f1f3;border-inline-start:1px solid var(--line)}
+    .hero-image img{width:100%;height:clamp(13rem,30vw,23rem);align-self:center;object-fit:contain}
+    .hero-image figcaption{border-top:1px solid var(--line);padding:.45rem .8rem}
+    .band{padding-block:clamp(1.6rem,4vw,3rem);border-bottom:1px solid var(--line)}
+    .categories{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;padding:0;margin:0;list-style:none;background:var(--line);border:1px solid var(--line)}
+    .categories a{display:flex;align-items:center;justify-content:space-between;gap:.35rem;min-height:54px;height:100%;padding:.5rem .7rem;background:#fff;font-weight:700;text-decoration:none}
+    .categories a:hover{background:var(--lime)}
+    .cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem}
+    .cards figure{margin:0;border:1px solid var(--line);background:#fff;min-width:0}
+    .cards img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;background:#f2f1f3}
+    .cards figcaption{padding:.65rem .8rem}
+    .cards strong{display:block}
+    .workbench{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:1rem}
+    table{border-collapse:collapse;width:100%;text-align:left;background:#fff}
+    caption{text-align:left;font-weight:750;margin-bottom:.45rem}
+    th,td{border:1px solid var(--line);padding:.48rem .6rem;vertical-align:top}
+    thead th{background:var(--violet)}
+    tbody th{width:30%;font-weight:750}
+    .memo{background:var(--lime);padding:1rem}
+    .memo ul{margin:.5rem 0;padding-inline-start:1.2rem}
+    .stories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+    .stories article{border-top:3px solid var(--dark);padding-top:.7rem}
+    .stories p:last-child{margin-bottom:0}
+    details{border-top:1px solid var(--line)}
+    summary{min-height:44px;padding:.65rem 0;font-weight:750;cursor:pointer}
+    details p{max-width:72ch;padding-inline-start:1rem}
+    @media(max-width:54rem){.categories{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:42rem){
+      .hero,.workbench,.stories{grid-template-columns:1fr}
+      .hero-image{border-inline-start:0;border-top:1px solid var(--line)}
+      .hero-image img{height:12rem}
+      .categories,.cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "FishBuy spreadsheet | Liens produits, tailles et photos QC",
+          "description": "Utilisez le FishBuy spreadsheet pour comparer vos liens produits, vérifier les tailles et les photos QC, puis estimer le coût total de votre colis.",
+          "inLanguage": "fr",
+          "about": ["Comparaison de liens produits", "Contrôle qualité sur photo", "Estimation des frais de livraison"]
+        },
+        {
+          "@type": "FAQPage",
+          "name": "Questions fréquentes sur le FishBuy spreadsheet",
+          "inLanguage": "fr",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Qu’est-ce qu’un FishBuy spreadsheet ?",
+              "acceptedAnswer": {"@type": "Answer", "text": "C’est un tableau de repérage pour réunir des liens produits et comparer les tailles, les variantes et les coûts avant une commande. Les catégories de ce guide ouvrent le catalogue CAFANS."}
+            },
+            {
+              "@type": "Question",
+              "name": "Où vérifier si un lien produit est encore valable ?",
+              "acceptedAnswer": {"@type": "Answer", "text": "Ouvrez la fiche du vendeur et contrôlez que la référence, le coloris et la taille sont encore proposés. Si vous passez par un intermédiaire, vérifiez aussi qu’il accepte ce lien et cette catégorie."}
+            },
+            {
+              "@type": "Question",
+              "name": "Quelles photos QC faut-il demander pour des baskets ?",
+              "acceptedAnswer": {"@type": "Answer", "text": "Demandez une vue de chaque profil, des semelles et de l’étiquette de taille. Si vous hésitez entre deux pointures, demandez aussi une photo de la semelle intérieure avec une règle."}
+            },
+            {
+              "@type": "Question",
+              "name": "Comment comparer deux devis pour le même colis ?",
+              "acceptedAnswer": {"@type": "Answer", "text": "Comparez-les pour la même destination, les mêmes dimensions emballées et le même contenu. Vérifiez le poids facturé, la devise et les frais inclus dans chaque devis."}
+            },
+            {
+              "@type": "Question",
+              "name": "Une photo suffit-elle pour authentifier un article de marque ?",
+              "acceptedAnswer": {"@type": "Answer", "text": "Une photo permet de vérifier des détails visibles. Pour établir la provenance d’un article de marque, demandez une preuve d’achat vérifiable et, au besoin, une expertise indépendante."}
+            }
+          ]
+        }
+      ]
+    }
+  </script>
+<link rel="canonical" href="https://kakobuyfinds.github.io/fjsph/">
+</head>
+<body>
+  <header class="masthead shell">
+    <a class="wordmark" href="https://www.cafans.com">www.cafans.com</a>
+    <span class="note">Carnet d’achat indépendant · Édition française</span>
+  </header>
+  <main class="shell">
+    <section class="hero" aria-labelledby="titre">
+      <div class="hero-copy">
+        <p class="kicker">Le carnet de repérage</p>
+        <h1 id="titre">FishBuy spreadsheet</h1>
+        <p>Un FishBuy spreadsheet est un tableau de repérage pour garder vos liens produits au même endroit et comparer des articles avant de commander. Choisissez un rayon CAFANS, relevez les bonnes mesures et vérifiez le coût du colis avant de valider.</p>
+        <a class="button" href="https://www.cafans.com">Ouvrir le catalogue CAFANS&nbsp; ↗</a>
+      </div>
+      <figure class="hero-image">
+        <img src="https://static.nike.com/a/images/f_auto,q_auto:eco,w_720/8e4fa932-b38b-4cbe-9f09-16ccdcc0b421/AIR%2BMAX%2B90.png"
+             srcset="https://static.nike.com/a/images/f_auto,q_auto:eco,w_420/8e4fa932-b38b-4cbe-9f09-16ccdcc0b421/AIR%2BMAX%2B90.png 420w, https://static.nike.com/a/images/f_auto,q_auto:eco,w_720/8e4fa932-b38b-4cbe-9f09-16ccdcc0b421/AIR%2BMAX%2B90.png 720w"
+             sizes="(max-width:42rem) calc(100vw - 2rem), (max-width:74rem) 45vw, 32rem"
+             width="720" height="720" alt="Nike Air Max 90 blanche et gris fumé, vue de profil" loading="eager" fetchpriority="high">
+        <figcaption class="note">Nike Air Max 90 · Vue latérale et détail de la semelle</figcaption>
+      </figure>
+    </section>
+
+    <nav class="band" aria-labelledby="rayons">
+      <p class="kicker">Répertoire · 10 rayons</p>
+      <h2 id="rayons">Parcourir les catégories</h2>
+      <ul class="categories">
+        <li><a href="https://cafans.com/category-911-Shoes.html">Chaussures <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://cafans.com/category-912-Hoodies%2FSweaters.html">Sweats et pulls <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://cafans.com/category-913-T-Shirts.html">T-shirts <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://cafans.com/category-914-Jackets.html">Vestes <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://cafans.com/category-915-Pants%2FShorts.html">Pantalons et shorts <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://cafans.com/category-916-Headwear.html">Casquettes et chapeaux <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://cafans.com/category-917-Sets.html">Ensembles <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://cafans.com/category-918-underwear%2Funderpants.html">Sous-vêtements <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://cafans.com/category-919-Jersey.html">Maillots <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://cafans.com/category-920-Accessories.html">Accessoires <span aria-hidden="true">↗</span></a></li>
+      </ul>
+    </nav>
+
+    <section class="band" aria-labelledby="fiche">
+      <p class="kicker">À recopier dans votre tableau</p>
+      <h2 id="fiche">Liens produits FishBuy et mesures à noter</h2>
+      <div class="workbench">
+        <table>
+          <caption>Modèle de fiche de comparaison</caption>
+          <thead><tr><th scope="col">Champ</th><th scope="col">Quoi relever</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Source</th><td>Lien vendeur, référence du modèle, variante exacte et date de vérification du stock.</td></tr>
+            <tr><th scope="row">Coupe et taille</th><td>Mesures à plat, unité utilisée et comparaison avec un article qui vous va déjà.</td></tr>
+            <tr><th scope="row">Contrôle visuel</th><td>Photos de la variante choisie, vue de l’étiquette, détails de finition et écarts à signaler.</td></tr>
+            <tr><th scope="row">Budget</th><td>Devise, livraison locale, frais de service, expédition internationale et frais à l’arrivée le cas échéant.</td></tr>
+            <tr><th scope="row">Décision</th><td>Disponibilité de la taille, conditions de retour et point restant à confirmer avant de payer.</td></tr>
+          </tbody>
+        </table>
+        <aside class="memo" aria-labelledby="mesures">
+          <h3 id="mesures">La bonne mesure selon le rayon</h3>
+          <ul>
+            <li>Baskets · longueur intérieure de la chaussure.</li>
+            <li>Vestes · carrure et longueur des manches.</li>
+            <li>Pantalons · tour de taille et longueur d’entrejambe.</li>
+            <li>Casquettes · tour de tête et marge de réglage.</li>
+            <li>Bracelets · circonférence intérieure et largeur du fermoir.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="band" aria-labelledby="images">
+      <p class="kicker">Quatre exemples en images</p>
+      <h2 id="images">Quels détails demander en photo ?</h2>
+      <div class="cards">
+        <figure>
+          <img src="https://in.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-light-reversible-cap--M5785L_PM2_Front%20view.png?hei=320&amp;wid=320&amp;fmt=webp" width="320" height="320" alt="Casquette Louis Vuitton réversible à motif Monogram brun" loading="lazy" decoding="async">
+          <figcaption><strong>Louis Vuitton</strong> Pour une casquette, regardez la courbure de la visière et demandez une vue du réglage arrière.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://media.gucci.com/style/DarkGray_Center_0_0_1200x1200/1785343518/A009U9_XJH31_2064_006_100_0000_Light-printed-cotton-jersey-t-shirt.jpg" width="1200" height="1200" alt="T-shirt Gucci en jersey beige et brun à motif GG" loading="lazy" decoding="async">
+          <figcaption><strong>Gucci</strong> Sur un T-shirt imprimé, comparez le placement du motif et demandez une photo du col à plat.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://assets.christiandior.com/is/image/diorprod/CPB06196ACWOC580_E07-2?wid=400&amp;hei=400" width="400" height="400" alt="Bob Dior Teddy-D à motif Dior Oblique bleu et beige" loading="lazy" decoding="async">
+          <figcaption><strong>Dior</strong> Sur un bob réversible, demandez une vue des deux faces et vérifiez la largeur du bord.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://assets.hermes.com/is/image/hermesproduct/700001F%203V_front_wm_101?%24product_default_bg%24=&amp;wid=360&amp;hei=360" width="360" height="360" alt="Bracelet Hermès Clic H en émail vert, avec fermoir doré en H" loading="lazy" decoding="async">
+          <figcaption><strong>Hermès</strong> Pour un bracelet rigide, demandez une vue du fermoir ouvert et une mesure du diamètre intérieur.</figcaption>
+        </figure>
+      </div>
+      <p class="note">Les photos illustrent des critères de comparaison. La disponibilité et la provenance se vérifient auprès du vendeur de chaque article.</p>
+    </section>
+
+    <section class="band" aria-labelledby="guide">
+      <p class="kicker">Trois lectures avant de commander</p>
+      <h2 id="guide">Guide d’achat FishBuy</h2>
+      <div class="stories">
+        <article>
+          <h3>Comparer deux fiches produit</h3>
+          <p>Vérifiez que les deux offres portent sur la même référence et la même variante. Pour un ensemble, confirmez quelles pièces sont comprises. Pour un maillot, notez si le flocage est inclus et demandez sa position sur la fiche ou sur une photo.</p>
+          <p>Si un tableau de tailles donne la largeur à plat et que l’autre donne le tour complet, convertissez les deux dans la même unité avant de comparer. Gardez la date et le lien de la fiche que vous avez utilisée.</p>
+        </article>
+        <article>
+          <h3>Lire les photos QC FishBuy</h3>
+          <p>Les photos QC, ou photos de contrôle qualité, servent à vérifier l’état et les détails visibles de l’article reçu. Comparez le coloris, les coutures, l’étiquette de taille et la présence des accessoires annoncés.</p>
+          <p>Si un doute subsiste, précisez l’angle ou la mesure à reprendre. Pour une fermeture éclair, une photo nette de la glissière et une vue de la veste fermée répondent à deux questions différentes.</p>
+        </article>
+        <article>
+          <h3>Estimer les frais de livraison FishBuy</h3>
+          <p>Pour une livraison en France, en Belgique, en Suisse ou au Canada, choisissez la destination exacte avant de comparer les devis. Additionnez le prix converti, le transport local, les frais de service et le transport international, puis vérifiez les éventuels frais à l’arrivée.</p>
+          <p>Pour un colis groupé, demandez le poids réel et les dimensions après emballage. Une boîte volumineuse peut modifier le poids facturé selon le transporteur. Vérifiez les conditions de retour avant de regrouper les articles.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="band" aria-labelledby="questions">
+      <p class="kicker">Réponses rapides</p>
+      <h2 id="questions">Questions fréquentes sur le FishBuy spreadsheet</h2>
+      <details open>
+        <summary>Qu’est-ce qu’un FishBuy spreadsheet ?</summary>
+        <p>C’est un tableau de repérage pour réunir des liens produits et comparer les tailles, les variantes et les coûts avant une commande. Les catégories de ce guide ouvrent le catalogue CAFANS.</p>
+      </details>
+      <details>
+        <summary>Où vérifier si un lien produit est encore valable ?</summary>
+        <p>Ouvrez la fiche du vendeur et contrôlez que la référence, le coloris et la taille sont encore proposés. Si vous passez par un intermédiaire, vérifiez aussi qu’il accepte ce lien et cette catégorie.</p>
+      </details>
+      <details>
+        <summary>Quelles photos QC faut-il demander pour des baskets ?</summary>
+        <p>Demandez une vue de chaque profil, des semelles et de l’étiquette de taille. Si vous hésitez entre deux pointures, demandez aussi une photo de la semelle intérieure avec une règle.</p>
+      </details>
+      <details>
+        <summary>Comment comparer deux devis pour le même colis ?</summary>
+        <p>Comparez-les pour la même destination, les mêmes dimensions emballées et le même contenu. Vérifiez le poids facturé, la devise et les frais inclus dans chaque devis.</p>
+      </details>
+      <details>
+        <summary>Une photo suffit-elle pour authentifier un article de marque ?</summary>
+        <p>Une photo permet de vérifier des détails visibles. Pour établir la provenance d’un article de marque, demandez une preuve d’achat vérifiable et, au besoin, une expertise indépendante.</p>
+      </details>
+    </section>
+  </main>
+  <footer class="shell">
+    <a class="wordmark" href="https://www.cafans.com">www.cafans.com</a>
+    <span class="note">Guide indépendant · Les marques citées identifient les modèles illustrés.</span>
+  </footer>
+</body>
+</html>
